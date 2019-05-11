@@ -13,13 +13,13 @@ public class TexasHoldem {
      * @return
      */
     public static String judgeCards(List<String> whiteCards, List<String> blackCards) {
-        long whiteScore = getScore(whiteCards);
-        long blackScore = getScore(blackCards);
-        if (whiteScore > blackScore)
-            return "White wins";
-        if (whiteScore == blackScore)
+        Result whiteResult = getScore(whiteCards);
+        Result blackResult = getScore(blackCards);
+        if (whiteResult.getScore() > blackResult.getScore())
+            return "White wins" + " - " + whiteResult.getState();
+        if (whiteResult.getScore() == blackResult.getScore())
             return "Tie";
-        return "Black wins";
+        return "Black wins" + " - " + blackResult.getState();
     }
 
     /**
@@ -28,44 +28,53 @@ public class TexasHoldem {
      * @param cards
      * @return
      */
-    public static long getScore(List<String> cards) {
+    public static Result getScore(List<String> cards) {
         List<Card> newCards = convertStringToCard(cards);
         sortCards(newCards);
-        long score = 0;
+        Result result = new Result(0, "");
         if (isStraightFlush(newCards) != 0) {
-            score += isStraightFlush(newCards);
-            return score;
+            result.setScore(isStraightFlush(newCards));
+            result.setState("Straight flush");
+            return result;
         }
         if (isFourOfaKind(newCards) != 0) {
-            score += isFourOfaKind(newCards);
-            return score;
+            result.setScore(isFourOfaKind(newCards));
+            result.setState("Four of a kind");
+            return result;
         }
         if (isFullHouse(newCards) != 0) {
-            score += isFullHouse(newCards);
-            return score;
+            result.setScore(isFullHouse(newCards));
+            result.setState("Full house");
+            return result;
         }
         if (isFlush(newCards) != 0) {
-            score += isFlush(newCards);
-            return score;
+            result.setScore(isFlush(newCards));
+            result.setState("Flush");
+            return result;
         }
         if (isStraight(newCards) != 0) {
-            score += isStraight(newCards);
-            return score;
+            result.setScore(isStraight(newCards));
+            result.setState("Straight");
+            return result;
         }
         if (isThreeOfaKind(newCards) != 0) {
-            score += isThreeOfaKind(newCards);
-            return score;
+            result.setScore(isThreeOfaKind(newCards));
+            result.setState("Three of a kind");
+            return result;
         }
         if (isTwoPairs(newCards) != 0) {
-            score += isTwoPairs(newCards);
-            return score;
+            result.setScore(isTwoPairs(newCards));
+            result.setState("Two pairs");
+            return result;
         }
         if (isPair(newCards) != 0) {
-            score += isPair(newCards);
-            return score;
+            result.setScore(isPair(newCards));
+            result.setState("Pair");
+            return result;
         }
-        score += isHighCard(newCards);
-        return score;
+        result.setScore(isHighCard(newCards));
+        result.setState("High card");
+        return result;
     }
 
     /**

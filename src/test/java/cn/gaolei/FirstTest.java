@@ -21,7 +21,7 @@ public class FirstTest {
         black.add("5C");
         black.add("9S");
         black.add("KH");
-
+        System.out.println(TexasHoldem.judgeCards(white,black));
         Assert.assertEquals("Tie", TexasHoldem.judgeCards(white, black));
     }
 }
