@@ -1,5 +1,8 @@
 package cn.gaolei;
 
+/**
+ * 扑克牌类，有两个属性，点数num和花色type
+ */
 public class Card {
     private Integer num;
     private Character type;

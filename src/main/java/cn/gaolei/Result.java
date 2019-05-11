@@ -1,7 +1,7 @@
 package cn.gaolei;
 
 /**
- * 结果封装类，把分数和获胜状态封装到一起
+ * 结果封装类，把分数score和获胜状态state封装到一起
  */
 public class Result {
     private long score;
