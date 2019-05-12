@@ -234,7 +234,7 @@ public class TexasHoldem {
             }
             num = cards.get(i).getNum();
         }
-        if (flag == 0)
+        if (flag == 1)
             return cards.get(0).getNum() * (long) Math.pow(14, 8);
         return 0;
     }
